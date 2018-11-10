@@ -10,20 +10,15 @@ dynamodb = boto3.resource('dynamodb')
 
 def create(event, context):
     data = json.loads(event['body'])
-    if 'temperature' not in data:
-        logging.error("Validation Failed")
-        raise Exception("Couldn't create the data item.")
-        return
-
-    timestamp = int(time.time() * 1000)
 
     table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
 
     item = {
         'id': str(uuid.uuid1()),
-        'temperature': data['temperature'],
-        'checked': False,
-        'timestamp': timestamp,
+        'event': data['event'],
+        'data': data['data'],
+        'coreid': data['coreid'],
+        'published_at': data['published_at'],
     }
 
     # write the data to the database
