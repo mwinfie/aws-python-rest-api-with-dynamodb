@@ -11,13 +11,13 @@ authorAvatar: 'https://avatars1.githubusercontent.com/u/8434141?v=4&s=140'
 -->
 # Serverless REST API
 
-This example demonstrates how to setup a [RESTful Web Services](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) allowing you to create, list, get, update and delete Todos. DynamoDB is used to store the data. This is just an example and of course you could use any data storage as a backend.
+This example demonstrates how to setup a [RESTful Web Services](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) allowing you to create, list, get, update and delete Particle.io data. DynamoDB is used to store the data. This is just an example and of course you could use any data storage as a backend.
 
 ## Structure
 
-This service has a separate directory for all the todo operations. For each operation exactly one file exists e.g. `todos/delete.py`. In each of these files there is exactly one function defined.
+This service has a separate directory for all the data operations. For each operation exactly one file exists e.g. `data/delete.py`. In each of these files there is exactly one function defined.
 
-The idea behind the `todos` directory is that in case you want to create a service containing multiple resources e.g. users, notes, comments you could do so in the same service. While this is certainly possible you might consider creating a separate service for each resource. It depends on the use-case and your preference.
+The idea behind the `data` directory is that in case you want to create a service containing multiple resources e.g. users, notes, comments you could do so in the same service. While this is certainly possible you might consider creating a separate service for each resource. It depends on the use-case and your preference.
 
 ## Use-cases
 
@@ -55,11 +55,11 @@ region: us-east-1
 api keys:
   None
 endpoints:
-  POST - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/todos
-  GET - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/todos
-  GET - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/todos/{id}
-  PUT - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/todos/{id}
-  DELETE - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/todos/{id}
+  POST - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/data
+  GET - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/data
+  GET - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/data/{id}
+  PUT - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/data/{id}
+  DELETE - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/data/{id}
 functions:
   serverless-rest-api-with-dynamodb-dev-update: arn:aws:lambda:us-east-1:488110005556:function:serverless-rest-api-with-dynamodb-dev-update
   serverless-rest-api-with-dynamodb-dev-get: arn:aws:lambda:us-east-1:488110005556:function:serverless-rest-api-with-dynamodb-dev-get
@@ -70,20 +70,20 @@ functions:
 
 ## Usage
 
-You can create, retrieve, update, or delete todos with the following commands:
+You can create, retrieve, update, or delete data with the following commands:
 
-### Create a Todo
+### Create a Data Entry
 
 ```bash
-curl -X POST https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/todos --data '{ "text": "Learn Serverless" }'
+curl -X POST https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/data --data '{ "text": "Learn Serverless" }'
 ```
 
 No output
 
-### List all Todos
+### List all Data
 
 ```bash
-curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/todos
+curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/data
 ```
 
 Example output:
@@ -91,11 +91,11 @@ Example output:
 [{"text":"Deploy my first service","id":"ac90feaa11e6-9ede-afdfa051af86","checked":true,"updatedAt":1479139961304},{"text":"Learn Serverless","id":"206793aa11e6-9ede-afdfa051af86","createdAt":1479139943241,"checked":false,"updatedAt":1479139943241}]%
 ```
 
-### Get one Todo
+### Get one Data Entry
 
 ```bash
-# Replace the <id> part with a real id from your todos table
-curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/todos/<id>
+# Replace the <id> part with a real id from your data table
+curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/data/<id>
 ```
 
 Example Result:
@@ -103,11 +103,11 @@ Example Result:
 {"text":"Learn Serverless","id":"ee6490d0-aa11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":false,"updatedAt":1479138570824}%
 ```
 
-### Update a Todo
+### Update a Data Entry
 
 ```bash
-# Replace the <id> part with a real id from your todos table
-curl -X PUT https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/todos/<id> --data '{ "text": "Learn Serverless", "checked": true }'
+# Replace the <id> part with a real id from your data table
+curl -X PUT https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/data/<id> --data '{ "text": "Learn Serverless", "checked": true }'
 ```
 
 Example Result:
@@ -115,11 +115,11 @@ Example Result:
 {"text":"Learn Serverless","id":"ee6490d0-aa11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":true,"updatedAt":1479138570824}%
 ```
 
-### Delete a Todo
+### Delete a Data Entry
 
 ```bash
-# Replace the <id> part with a real id from your todos table
-curl -X DELETE https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/todos/<id>
+# Replace the <id> part with a real id from your data table
+curl -X DELETE https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/data/<id>
 ```
 
 No output
