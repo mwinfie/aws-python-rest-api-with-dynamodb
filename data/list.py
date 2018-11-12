@@ -17,8 +17,6 @@ def list(event, context):
     # fetch all data from the database
     result = table.scan(Limit=limit)
 
-    #event["queryStringParameters"]['limit'] will be used to access limit Query String
-
     # create a response
     response = {
         "statusCode": 200,
