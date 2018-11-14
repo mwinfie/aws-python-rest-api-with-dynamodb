@@ -42,9 +42,6 @@ functions:
           path: data/{id}
           method: get
           cors: true
-          request:
-            template:
-              application/json: '{"limit":"$input.params(''limit'')"}'
 
   update:
     handler: data/update.update
